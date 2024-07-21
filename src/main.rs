@@ -1,13 +1,14 @@
-#[allow(unused_imports)]
+use anyhow::Result;
 use std::io::{self, Write};
 
-fn main() {
-    // Uncomment this block to pass the first stage
-    // print!("$ ");
-    // io::stdout().flush().unwrap();
+fn main() -> Result<()> {
+    print!("$ ");
+    io::stdout().flush()?;
 
     // Wait for user input
     let stdin = io::stdin();
     let mut input = String::new();
-    stdin.read_line(&mut input).unwrap();
+    stdin.read_line(&mut input)?;
+
+    Ok(())
 }
