@@ -11,6 +11,15 @@ fn handle_command(c: Command) {
     match c {
         Command::Exit(code) => exit(code),
         Command::Echo(msg) => println!("{msg}"),
+        Command::Type(cmd) => resolve_type(&cmd),
+    }
+}
+
+fn resolve_type(cmd: &str) {
+    if command::is_builtin(cmd) {
+        println!("{cmd} is a shell builtin");
+    } else {
+        println!("{cmd}: not found");
     }
 }
 

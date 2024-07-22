@@ -1,10 +1,15 @@
-use anyhow::Result;
+use anyhow::{Ok, Result};
 use std::str::FromStr;
+
+pub fn is_builtin(cmd: &str) -> bool {
+    ["exit", "echo", "type"].contains(&cmd)
+}
 
 #[derive(Debug)]
 pub enum Command {
-    Exit(i32),
     Echo(String),
+    Exit(i32),
+    Type(String),
 }
 
 impl FromStr for Command {
@@ -15,6 +20,7 @@ impl FromStr for Command {
         match cmd {
             "exit" => Ok(Self::Exit(args.parse()?)),
             "echo" => Ok(Self::Echo(args.to_owned())),
+            "type" => Ok(Self::Type(args.to_owned())),
             e => anyhow::bail!("{e}: command not found"),
         }
     }
