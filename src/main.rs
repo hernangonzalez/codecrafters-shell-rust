@@ -16,22 +16,23 @@ impl FromStr for Command {
 }
 
 fn main() -> Result<()> {
-    print!("$ ");
-    io::stdout().flush()?;
+    loop {
+        // Init prompt
+        print!("$ ");
+        io::stdout().flush()?;
 
-    // Wait for user input
-    let stdin = io::stdin();
-    let mut input = String::new();
-    stdin.read_line(&mut input)?;
+        // Wait for user input
+        let stdin = io::stdin();
+        let mut input = String::new();
+        stdin.read_line(&mut input)?;
 
-    // Parse input
-    for line in input.lines() {
-        let res: Result<Command> = line.parse();
-        match res {
-            Ok(_) => todo!(),
-            Err(e) => println!("{e}"),
+        // Parse input
+        for line in input.lines() {
+            let res: Result<Command> = line.parse();
+            match res {
+                Ok(_) => todo!(),
+                Err(e) => println!("{e}"),
+            }
         }
     }
-
-    Ok(())
 }
